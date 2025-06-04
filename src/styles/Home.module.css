@@ -1,0 +1,107 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+.description {
+    display: inherit;
+    justify-content: inherit;
+    align-items: inherit;
+    font-size: 0.85rem;
+    max-width: var(--max-width);
+    width: 100%;
+    z-index: 2;
+    font-family: var(--font-mono);
+}
+
+/* 新增：容器布局类 */
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.leftPanel {
+    flex: 1;
+    padding: 1rem;
+    margin-right: 1rem;
+}
+
+.rightPanel {
+    flex: 1;
+    padding: 1rem;
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .leftPanel, .rightPanel {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+}
+
+.card {
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: rgba(30, 38, 55, 0.95);
+    border: 1px solid rgba(88, 102, 126, 0.3);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(88, 102, 126, 0.5);
+}
+
+.card h2 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #e0e0e0;
+}
+
+.card p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #b0bec5;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    background-color: #1976d2;
+}
+
+.button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.grid {
+    background-color: #2c3950;
+    border-radius: 10px;
+    border: 1px solid #37474f;
+}

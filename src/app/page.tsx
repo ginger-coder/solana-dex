@@ -1,103 +1,129 @@
-import Image from "next/image";
+"use client";
+import styles from '@/styles/Home.module.css';
+import Head from 'next/head';
+import WalletConnectButton from '@/components/WalletConnectButton';
+import SwapInterface from '@/components/SwapInterface';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { publicKey } = useWallet();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <>
+      <Head>
+        <title>Solana DEX 交易平台</title>
+        <meta name="description" content="在Solana上交换代币" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main className={styles.main} style={{
+        background: 'linear-gradient(to bottom, #1a2236, #121721)',
+        minHeight: '100vh',
+        padding: '1.5rem 1rem',
+        color: '#e0e0e0'
+      }}>
+        <div className={styles.description} style={{
+          background: 'rgba(30, 38, 55, 0.95)',
+          borderRadius: '12px',
+          boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)',
+          padding: '1rem 2rem',
+          marginBottom: '2rem',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          width: '100%',
+          maxWidth: '1200px',
+          border: '1px solid rgba(88, 102, 126, 0.2)'
+        }}>
+          <p style={{ 
+            fontSize: '1.1rem', 
+            fontWeight: '500',
+            color: '#e0e0e0',
+            display: 'flex',
+            alignItems: 'center',
+            margin: 0
+          }}>
+            Solana 代币交易平台 &nbsp;
+            <code className={styles.code} style={{
+              background: 'rgba(20, 28, 45, 0.7)',
+              padding: '0.5rem 0.75rem',
+              borderRadius: '6px',
+              fontSize: '0.9rem',
+              color: publicKey ? '#64b5f6' : '#ff8a80',
+              border: '1px solid rgba(88, 102, 126, 0.3)'
+            }}>{publicKey ? `已连接: ${publicKey.toBase58().slice(0, 4)}...${publicKey.toBase58().slice(-4)}` : '钱包未连接'}</code>
+          </p>
+          <div>
+            <WalletConnectButton />
+          </div>
+        </div>
+        
+        {/* 左右布局容器 */}
+        <div className={styles.container}>
+          {/* 左侧面板 */}
+          <div className={styles.leftPanel}>
+            <div className={styles.card} style={{ height: '100%' }}>
+              <h2 style={{ textAlign: 'center' }}>市场概览</h2>
+              <p style={{ textAlign: 'center', marginBottom: '1.5rem' }}>关注Solana生态系统中的热门代币和交易对</p>
+              
+              <div style={{ 
+                borderRadius: '8px', 
+                background: 'rgba(44, 57, 80, 0.5)', 
+                padding: '1rem',
+                marginBottom: '1rem'
+              }}>
+                <h3 style={{ fontSize: '1rem', color: '#90caf9', marginBottom: '0.5rem' }}>SOL/USDC</h3>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>当前价格:</span>
+                  <span style={{ color: '#81c784', fontWeight: 'bold' }}>$118.45</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>24h变化:</span>
+                  <span style={{ color: '#81c784' }}>+3.2%</span>
+                </div>
+              </div>
+              
+              <div style={{ 
+                borderRadius: '8px', 
+                background: 'rgba(44, 57, 80, 0.5)', 
+                padding: '1rem',
+                marginBottom: '1rem'
+              }}>
+                <h3 style={{ fontSize: '1rem', color: '#90caf9', marginBottom: '0.5rem' }}>JUP/USDC</h3>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>当前价格:</span>
+                  <span style={{ color: '#ff8a80', fontWeight: 'bold' }}>$0.675</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>24h变化:</span>
+                  <span style={{ color: '#ff8a80' }}>-1.8%</span>
+                </div>
+              </div>
+              
+              <div style={{ 
+                borderRadius: '8px', 
+                background: 'rgba(44, 57, 80, 0.5)', 
+                padding: '1rem' 
+              }}>
+                <h3 style={{ fontSize: '1rem', color: '#90caf9', marginBottom: '0.5rem' }}>BONK/USDC</h3>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>当前价格:</span>
+                  <span style={{ color: '#81c784', fontWeight: 'bold' }}>$0.00001845</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span>24h变化:</span>
+                  <span style={{ color: '#81c784' }}>+5.7%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* 右侧面板 - 兑换界面 */}
+          <div className={styles.rightPanel}>
+            <SwapInterface />
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    </>
   );
 }
