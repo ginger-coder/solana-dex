@@ -8,7 +8,6 @@ import {
   SolflareWalletAdapter,
   TorusWalletAdapter,
   LedgerWalletAdapter,
-  // Add other wallets you want to support
 } from '@solana/wallet-adapter-wallets';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { RPC_URL, SOLANA_NETWORK } from '@/lib/constants';

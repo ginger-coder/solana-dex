@@ -2,18 +2,10 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { VersionedTransaction, LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
-// 从 @jup-ag/api 导入
 import { createJupiterApiClient, QuoteGetRequest, SwapRequest, QuoteResponse } from '@jup-ag/api';
-// 我们的自定义类型（可以与 @jup-ag/api 的类型比较和对齐，但通常它们是兼容的，因为都基于 OpenAPI 规范）
-import { SwapResponse as CustomSwapResponse } from '@/types/jupiter'; // Renamed to avoid conflict if SDK exports SwapResponse
 import { INPUT_MINT_ADDRESS, OUTPUT_MINT_ADDRESS, SOLANA_NETWORK } from '@/lib/constants';
 import { toast } from 'react-toastify';
 import styles from '@/styles/Home.module.css';
-
-// 注意：@jup-ag/api 本身会导出 QuoteResponse 和 SwapResponse 类型。
-// 为清晰起见，如果我们的自定义类型与之冲突，最好重命名或直接使用 SDK 的类型。
-// 在此示例中，假设我们的 types/jupiter.ts 中的 QuoteResponse 与 SDK 的兼容。
-// 对于 SwapResponse，我们使用 CustomSwapResponse 以防 SDK 的 SwapResponse 结构略有不同或用于请求。
 
 const SwapInterface: React.FC = () => {
     const { connection } = useConnection();
