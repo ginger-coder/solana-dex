@@ -9,4 +9,4 @@ export const RPC_URL = clusterApiUrl(SOLANA_NETWORK);
 export const INPUT_MINT_ADDRESS = 'So11111111111111111111111111111111111111112'; // SOL
 export const OUTPUT_MINT_ADDRESS = 'Gh9ZwEmdLJ8DscKNTkTqPbNwLNNBjuSzaG9Vp2KGtKJr'; // USDC (Devnet)
 
-export const JUPITER_API_BASE_URL = 'https://quote-api.jup.ag/v6';
+export const JUPITER_API_BASE_URL = 'https://lite-api.jup.ag/swap/v1/quote';

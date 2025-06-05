@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { VersionedTransaction } from '@solana/web3.js';
 import { createJupiterApiClient, QuoteGetRequest, SwapRequest, QuoteResponse } from '@jup-ag/api';
-import { INPUT_MINT_ADDRESS, OUTPUT_MINT_ADDRESS, SOLANA_NETWORK } from '@/lib/constants';
+import { INPUT_MINT_ADDRESS, OUTPUT_MINT_ADDRESS, SOLANA_NETWORK, JUPITER_API_BASE_URL } from '@/lib/constants';
 import { toast } from 'react-toastify';
 import styles from '@/styles/Home.module.css';
 import { useWindowSize } from '@/hooks/useWindowSize';
@@ -15,7 +15,9 @@ const SwapInterface: React.FC = () => {
     const isSmallScreen = width <= 480;
 
     // 初始化 Jupiter API 客户端
-    const jupiterApi = useMemo(() => createJupiterApiClient(), []);
+    const jupiterApi = useMemo(() => createJupiterApiClient({
+        basePath: JUPITER_API_BASE_URL
+    }), []);
 
     const [inputMint, setInputMint] = useState<string>(INPUT_MINT_ADDRESS);
     const [outputMint, setOutputMint] = useState<string>(OUTPUT_MINT_ADDRESS);
